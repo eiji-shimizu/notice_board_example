@@ -18,7 +18,15 @@
 
 <body>
     <h2>{{__('userRegistration')}}</h2>
-    <form action="/add" method="POST">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    <form action="/noticeboard/register" method="POST">
+        <input type="text" name="name">
+        <input type="text" name="email">
+        <input type="text" name="password">
         <button type='submit'>{{__('userRegistration')}}</button>
         @csrf
     </form>

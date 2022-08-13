@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::prefix('noticeboard')->group(function () {
 
-Route::get('/register', function () {
-    return view('register');
-});
+    // Route::get('/', function () {
+    //     return view('login');
+    // });
 
-Route::post('/add', [App\Http\Controllers\UserController::class, 'register']);
-Route::post('/login', [App\Http\Controllers\UserController::class, 'login']);
+    // Route::get('/register', function () {
+    //     return view('register');
+    // });
+
+    // Route::post('/add', [App\Http\Controllers\UserController::class, 'register']);
+    // Route::post('/login', [App\Http\Controllers\UserController::class, 'login']);
+});
