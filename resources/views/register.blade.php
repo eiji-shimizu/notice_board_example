@@ -24,9 +24,14 @@
         @endforeach
     </ul>
     <form action="/noticeboard/register" method="POST">
-        <input type="text" name="name">
-        <input type="text" name="email">
-        <input type="text" name="password">
+        <label for="name">{{__('userName')}}</label><br>
+        <input type="text" name="name"><br>
+        <label for="email">{{__('email')}}</label><br>
+        <input type="text" name="email"><br>
+        <label for="password">{{__('password')}}</label><br>
+        <input type="text" name="password"><br>
+        <label for="password_confirmation">{{__('password_confirmation')}}</label><br>
+        <input type="text" name="password_confirmation"><br>
         <button type='submit'>{{__('userRegistration')}}</button>
         @csrf
     </form>
