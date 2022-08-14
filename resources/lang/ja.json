@@ -1,4 +1,5 @@
 {
     "login": "ログイン",
-    "userRegistration": "ユーザー登録"
+    "userRegistration": "ユーザー登録",
+    "The :attribute must be at least :length characters.": ":attributeは、:length文字以上で指定してください。"
 }
