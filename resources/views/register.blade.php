@@ -23,7 +23,7 @@
         <li>{{ $error }}</li>
         @endforeach
     </ul>
-    <form action="/noticeboard/register" method="POST">
+    <form action="register" method="POST">
         <label for="name">{{__('userName')}}</label><br>
         <input type="text" name="name"><br>
         <label for="email">{{__('email')}}</label><br>
