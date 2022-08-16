@@ -18,7 +18,16 @@
 
 <body>
     <h2>{{__('login')}}</h2>
-    <form action="/login" method="POST">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    <form action="login" method="POST">
+        <label for="email">{{__('email')}}</label><br>
+        <input type="text" name="email"><br>
+        <label for="password">{{__('password')}}</label><br>
+        <input type="text" name="password"><br>
         <button type='submit'>{{__('login')}}</button>
         @csrf
     </form>
