@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('noticeboard')->group(function () {
 
     Route::get('top', function () {
-        return view('welcome');
+        return view('top');
     });
 
     // Route::get('/register', function () {
