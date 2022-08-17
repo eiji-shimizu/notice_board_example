@@ -24,6 +24,7 @@
 <body>
     <div id="app">
         <h2>{{__('top')}}</h2>
+        <header-component></header-component>
         <hello-component></hello-component>
     </div>
 </body>

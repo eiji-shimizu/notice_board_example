@@ -1,15 +1,15 @@
 <template>
-    <div>
-        {{message}}
-    </div>
+  <div>
+    {{ message }}
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                message: 'Hello World',
-            }
-        }
-    }
+export default {
+  data() {
+    return {
+      message: "こんにちは",
+    };
+  },
+};
 </script>
