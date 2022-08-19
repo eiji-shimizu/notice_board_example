@@ -1,15 +1,18 @@
 <template>
-  <div>
-    ヘッダー
-    <form action="logout" method="POST">
-      <button type="submit" @click="logout">ログアウト</button>
-      <input type="hidden" name="_token" v-model="state.token" />
-    </form>
+  <div class="container">
+    <div class="container">ヘッダー</div>
+    <div class="right_container">
+      <form action="logout" method="POST">
+        <button type="submit" @click="logout">ログアウト</button>
+        <input type="hidden" name="_token" v-model="state.token" />
+      </form>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, MetaHTMLAttributes } from "vue";
+import { get } from "./rest";
 
 interface State {
   token: string;
@@ -24,6 +27,12 @@ export default defineComponent({
     }
     const state = reactive<State>({
       token: csrfToken,
+    });
+    get("words/test").then((w) => {
+      console.log((w as any).contents);
+    });
+    get("words/logout").then((w) => {
+      console.log((w as any).contents);
     });
     return { state };
   },

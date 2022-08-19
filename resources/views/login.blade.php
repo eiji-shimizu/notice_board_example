@@ -8,29 +8,31 @@
     <title>notice board example</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <style>
-    </style>
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
-    <h2>{{__('login')}}</h2>
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-    <form action="login" method="POST">
-        <label for="email">{{__('email')}}</label><br>
-        <input type="text" name="email"><br>
-        <label for="password">{{__('password')}}</label><br>
-        <input type="text" name="password"><br>
-        <button type='submit'>{{__('login')}}</button>
-        @csrf
-    </form>
+    <div class="center_container">
+        <div class="contents_area">
+            <h2>{{__('login')}}</h2>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <form action="login" method="POST">
+                <label for="email">{{__('email')}}</label><br>
+                <input type="text" name="email"><br>
+                <label for="password">{{__('password')}}</label><br>
+                <input type="text" name="password"><br>
+                <button type='submit'>{{__('login')}}</button>
+                @csrf
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

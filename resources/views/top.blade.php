@@ -11,11 +11,9 @@
     <title>notice board example</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <style>
-    </style>
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Scripts -->
     <script src="{{ mix('/js/app.js') }}" defer></script>
