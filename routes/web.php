@@ -19,6 +19,8 @@ Route::prefix('noticeboard')->group(function () {
         return view('top');
     });
 
+    Route::get('words/{key}', 'App\Http\Controllers\WordsController@get');
+
     // Route::get('/register', function () {
     //     return view('register');
     // });

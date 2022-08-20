@@ -7,7 +7,7 @@ const PORT = '8000';
 const APP_NAME = 'noticeboard';
 
 function createUrl(url: string): string {
-    return PROTOCOL + '://' + HOST + ':' + PORT + '/' + 'api' + '/' + APP_NAME + '/' + url;
+    return PROTOCOL + '://' + HOST + ':' + PORT + '/' + APP_NAME + '/' + url;
 }
 
 async function get(url: string): Promise<JSON> {

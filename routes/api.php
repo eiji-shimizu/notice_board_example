@@ -19,7 +19,4 @@ Route::prefix('noticeboard')->group(function () {
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         return $request->user();
     });
-
-    Route::get('words/{key}', 'App\Http\Controllers\Api\WordsController@get');
-
 });
