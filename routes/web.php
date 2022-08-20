@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('noticeboard')->group(function () {
+Route::prefix('noticeboard')->middleware(['auth'])->group(function () {
 
     Route::get('top', function () {
         return view('top');

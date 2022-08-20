@@ -2,15 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-
-class UserController extends BaseController
+class UserController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
     /**
      * 新規ユーザー登録
      *
@@ -37,7 +30,7 @@ class UserController extends BaseController
         // 2.既に登録済みのメールアドレスとパスワードが一致した場合 -> ログイン処理
         // メールアドレスにトークンの値を含んだメール送信
         // そのメールアドレスにて確認処理がなされた場合ログイン可とする
-        
+
         // 本当は2段階認証の種類を選べるようにして,同じメールアドレスでは確認しない方がよい
         // また省略のための機能もあった方がよい
         // しかしいずれも今のところは実装対象外とする
