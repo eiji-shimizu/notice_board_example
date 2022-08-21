@@ -1,9 +1,11 @@
 <template>
   <div class="container">
-    <div class="container">ヘッダー</div>
+    <div class="container">
+      <span>{{ state.message }}</span>
+    </div>
     <div class="right_container">
       <form action="logout" method="POST">
-        <button type="submit" @click="logout">ログアウト</button>
+        <button type="submit" @click="logout">{{ state.logout }}</button>
         <input type="hidden" name="_token" v-model="state.token" />
       </form>
     </div>
@@ -11,11 +13,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, MetaHTMLAttributes } from "vue";
+import { defineComponent, reactive, MetaHTMLAttributes } from "vue";
 import { get } from "./rest";
 
 interface State {
   token: string;
+  message: string;
+  logout: string;
+}
+
+async function createMessage(): Promise<string> {
+  let msg: string = "";
+  await get("words/hello").then((res) => {
+    msg = (res as any).contents;
+  });
+  await get("userInfo").then((user) => {
+    msg += " " + (user as any).name;
+  });
+  return msg;
 }
 
 export default defineComponent({
@@ -27,12 +42,14 @@ export default defineComponent({
     }
     const state = reactive<State>({
       token: csrfToken,
+      message: "",
+      logout: "",
     });
-    get("words/test").then((w) => {
-      console.log((w as any).contents);
+    createMessage().then((msg) => {
+      state.message = msg;
     });
-    get("words/logout").then((w) => {
-      console.log((w as any).contents);
+    get("words/logout").then((res) => {
+      state.logout = (res as any).contents;
     });
     return { state };
   },

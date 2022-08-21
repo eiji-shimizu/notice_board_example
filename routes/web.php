@@ -19,7 +19,17 @@ Route::prefix('noticeboard')->middleware(['auth'])->group(function () {
         return view('top');
     });
 
+
+    /**
+     * 各WebAPI 外部からのアクセスを想定していないものはこのファイル内でルーティングする
+     */
+
+    // 単語を取得する
     Route::get('words/{key}', 'App\Http\Controllers\WordsController@get');
+
+    // ログインユーザー情報を取得する
+    Route::get('userInfo', 'App\Http\Controllers\UserController@getLoginUserInfo');
+
 
     // Route::get('/register', function () {
     //     return view('register');
