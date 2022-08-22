@@ -5,7 +5,7 @@
     </div>
     <div class="right_container">
       <form action="logout" method="POST">
-        <button type="submit" @click="logout">{{ state.logout }}</button>
+        <button type="submit">{{ state.logout }}</button>
         <input type="hidden" name="_token" v-model="state.token" />
       </form>
     </div>

@@ -30,6 +30,9 @@ Route::prefix('noticeboard')->middleware(['auth'])->group(function () {
     // ログインユーザー情報を取得する
     Route::get('userInfo', 'App\Http\Controllers\UserController@getLoginUserInfo');
 
+    // 投稿
+    Route::post('addItem', 'App\Http\Controllers\ItemController@addItem');
+
 
     // Route::get('/register', function () {
     //     return view('register');

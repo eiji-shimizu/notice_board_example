@@ -15,5 +15,9 @@ async function get(url: string): Promise<JSON> {
     return (response.data as JSON);
 }
 
+async function post(url: string, data: FormData): Promise<JSON> {
+    let response = await axios.post(createUrl(url), data);
+    return (response.data as JSON);
+}
 
-export { get };
+export { get, post };
