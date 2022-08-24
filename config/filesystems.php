@@ -30,6 +30,19 @@ return [
 
     'disks' => [
 
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => 'localhost',
+            'username' => 'ftp_user',
+            'password' => 'ftp_password',
+            // Optional FTP Settings...
+            'port'     => 21,
+            // 'root'     => '',
+            // 'passive'  => true,
+            // 'ssl'      => true,
+            'timeout'  => 30,
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

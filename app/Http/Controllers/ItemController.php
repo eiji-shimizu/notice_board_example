@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
 class ItemController extends Controller
@@ -22,7 +23,11 @@ class ItemController extends Controller
         // ただし不正値が来てもDB側のテーブル定義に反する場合はINSERTされることはない
         \DB::beginTransaction();
         try {
-            $uuidStr = Str::remove('-', Str::uuid()->toString());
+            $uuidStr = null;
+            if (!is_null($request->file('file'))) {
+                // 画像ファイルがアップロードされてきた場合はファイル名を生成
+                $uuidStr = Str::remove('-', Str::uuid()->toString());
+            }
             Log::debug($uuidStr);
             \DB::table('items')->insert([
                 'text' => $request->input('text'),
@@ -32,14 +37,14 @@ class ItemController extends Controller
                 'updated_at' => Carbon::now()
             ]);
             if (!is_null($request->file('file'))) {
-                Log::debug($request->file('file')->getClientOriginalName());
+                // 拡張子をつけたファイル名にして保存する
+                $file = $request->file('file');
+                Log::debug($file->getClientOriginalName());
+                $extension = $file->getClientOriginalExtension();
+                $fileName = $uuidStr . '.' . $extension;
+                Log::debug($fileName);
+                $file->storeAs('', $fileName);
             }
-            // \DB::table('images')->insert([
-            //     'image' => $request->file,
-            //     'user_id' => Auth::user()->getAuthIdentifier(),
-            //     'created_at' => Carbon::now(),
-            //     'updated_at' => Carbon::now()
-            // ]);
             \DB::commit();
         } catch (\Exception $e) {
             Log::debug($e);
