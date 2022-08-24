@@ -16,9 +16,9 @@ class UserController extends Controller
      */
     public function getLoginUserInfo(Request $request)
     {
-        $users =  Auth::user();
+        $user =  Auth::user();
         return response()->json([
-            'name' => $users->name
+            'name' => $user->name
         ], 200);
     }
 }

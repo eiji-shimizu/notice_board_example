@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ItemController extends Controller
 {
@@ -16,8 +17,25 @@ class ItemController extends Controller
      */
     public function addItem(Request $request)
     {
-        Log::debug('addItem');
-        Log::debug($request->input('text'));
-        Log::debug($request->file->getClientOriginalName());
+        // 本来は入力チェックが必要
+        // ただし不正値が来てもDB側のテーブル定義に反する場合はINSERTされることはない
+        \DB::beginTransaction();
+        try {
+            \DB::table('items')->insert([
+                'text' => $request->input('text'),
+                'user_id' => Auth::user()->getAuthIdentifier(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+            // \DB::table('images')->insert([
+            //     'image' => $request->file,
+            //     'user_id' => Auth::user()->getAuthIdentifier(),
+            //     'created_at' => Carbon::now(),
+            //     'updated_at' => Carbon::now()
+            // ]);
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollback();
+        }
     }
 }
