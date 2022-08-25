@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
-    <div class="container">
+  <div class="space_between_container">
+    <div>
       <span>{{ state.message }}</span>
     </div>
-    <div class="right_container">
+    <div>
       <form action="logout" method="POST">
         <button type="submit">{{ state.logout }}</button>
         <input type="hidden" name="_token" v-model="state.token" />

@@ -23,6 +23,7 @@
     <div id="app">
         <h2>{{__('top')}}</h2>
         <header-component></header-component>
+        <br>
         <item-list-component></item-list-component>
         <add-item-component></add-item-component>
     </div>

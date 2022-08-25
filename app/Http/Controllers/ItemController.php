@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class ItemController extends Controller
 {
     /**
-     * Undocumented function
+     * 投稿データを保存する
      *
      * @param Request $request
      * @return void
@@ -53,25 +53,28 @@ class ItemController extends Controller
     }
 
     /**
-     * Undocumented function
+     * 投稿データのリストを返す
      *
      * @param Request $request
-     * @return void
+     * @return JSON response
      */
     public function getItems(Request $request)
     {
-        $items = \DB::table('items')->select()->get();
+        $users = \DB::table('users')->select('id as user_id', 'name');
+        $result = \DB::table('items')->leftJoinSub($users, 'users', function ($join) {
+            $join->on('items.user_id', '=', 'users.user_id');
+        })->get();
         return response()->json([
-            'items' => $items
+            'items' => $result
         ], 200);
     }
 
     /**
-     * Undocumented function
+     * $keyで指定された画像データをダウンロードする
      *
      * @param Request $request
-     * @param [type] $key
-     * @return void
+     * @param [string] $key
+     * @return JSON response
      */
     public function getImage(Request $request, $key)
     {
