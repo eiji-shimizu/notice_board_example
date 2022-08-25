@@ -33,6 +33,9 @@ Route::prefix('noticeboard')->middleware(['auth'])->group(function () {
     // 投稿
     Route::post('addItem', 'App\Http\Controllers\ItemController@addItem');
 
+    // 投稿画像取得
+    Route::get('getImage/{key}', 'App\Http\Controllers\ItemController@getImage');
+
 
     // Route::get('/register', function () {
     //     return view('register');

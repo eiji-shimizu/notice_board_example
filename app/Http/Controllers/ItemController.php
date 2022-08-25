@@ -47,8 +47,20 @@ class ItemController extends Controller
             }
             \DB::commit();
         } catch (\Exception $e) {
-            Log::debug($e);
             \DB::rollback();
+            throw new \Exception("unexpected error has occurred.", 0, $e);
         }
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param [type] $key
+     * @return void
+     */
+    public function getImage(Request $request, $key)
+    {
+        return Storage::download($key);
     }
 }
