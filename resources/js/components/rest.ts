@@ -20,4 +20,4 @@ async function post(url: string, data: FormData): Promise<JSON> {
     return (response.data as JSON);
 }
 
-export { get, post };
+export { get, post, createUrl };

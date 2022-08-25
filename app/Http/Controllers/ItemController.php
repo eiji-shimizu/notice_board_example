@@ -56,6 +56,20 @@ class ItemController extends Controller
      * Undocumented function
      *
      * @param Request $request
+     * @return void
+     */
+    public function getItems(Request $request)
+    {
+        $items = \DB::table('items')->select()->get();
+        return response()->json([
+            'items' => $items
+        ], 200);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
      * @param [type] $key
      * @return void
      */
