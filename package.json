@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "typescript": "^4.7.4",
-        "vue": "^3.2.37"
+        "vue": "^3.2.37",
+        "vuex": "^4.0.2"
     }
 }

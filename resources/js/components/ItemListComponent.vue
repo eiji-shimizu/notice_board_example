@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="item in state.itemList" :key="item.itemId">
+    <div v-for="item in list" :key="item.itemId">
       <item-component
         v-bind:text="item.text"
         v-bind:imageFilePath="item.imageFilePath"
@@ -12,32 +12,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, onBeforeUnmount } from "vue";
+import {
+  defineComponent,
+  reactive,
+  computed,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
+import { useStore } from "vuex";
+
+import { Item } from "./ItemList";
 import { get, createUrl } from "./rest";
 
-interface Item {
-  itemId: bigint;
-  text: string;
-  imageFilePath: string;
-  userName: string;
-  createdAt: string;
-}
-
 interface State {
-  itemList: Array<Item>;
   // ポーリング用
   intervalId: any;
 }
 
 export default defineComponent({
   setup() {
+    const store = useStore();
+
     const state = reactive<State>({
-      itemList: new Array<Item>(),
       intervalId: null,
     });
 
     get("getItems").then((data) => {
-      console.log(data);
       (data as any).items.forEach((element: any) => {
         let imageUrl = "";
         if (element.image_id) {
@@ -50,7 +50,7 @@ export default defineComponent({
           userName: element.name,
           createdAt: element.created_at,
         };
-        addItemToList(i);
+        store.commit("add", i);
       });
     });
 
@@ -70,7 +70,7 @@ export default defineComponent({
               userName: element.name,
               createdAt: element.created_at,
             };
-            addItemToList(i);
+            store.commit("add", i);
           });
         });
       }, 5000);
@@ -81,18 +81,11 @@ export default defineComponent({
       clearInterval(state.intervalId);
     });
 
-    const addItemToList = (i: Item) => {
-      // この処理は並列アクセスを考慮しておらず本当はNGなので
-      // 実際のプロジェクトでは何らかの状態管理手法を導入するべき
-      const ret = state.itemList.find((element) => {
-        return element.itemId === i.itemId;
-      });
-      if (ret === undefined) {
-        state.itemList.push(i);
-      }
-    };
+    const list = computed(() => {
+      return store.state.itemList.items;
+    });
 
-    return { state };
+    return { state, list };
   },
 });
 </script>
