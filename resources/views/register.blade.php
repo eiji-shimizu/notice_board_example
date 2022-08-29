@@ -29,9 +29,9 @@
                 <label for="email">{{__('email')}}</label><br>
                 <input type="text" name="email"><br>
                 <label for="password">{{__('password')}}</label><br>
-                <input type="text" name="password"><br>
+                <input type="password" name="password"><br>
                 <label for="password_confirmation">{{__('password_confirmation')}}</label><br>
-                <input type="text" name="password_confirmation"><br>
+                <input type="password" name="password_confirmation"><br>
                 <button type='submit'>{{__('userRegistration')}}</button>
                 @csrf
             </form>

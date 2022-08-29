@@ -13,6 +13,7 @@ class ItemController extends Controller
 {
     /**
      * 投稿データを保存する
+     * 戻り値は本来は結果のJSONであるべきであるがここではvoidとする
      *
      * @param Request $request
      * @return void
@@ -25,6 +26,15 @@ class ItemController extends Controller
         try {
             $uuidStr = null;
             if (!is_null($request->file('file'))) {
+                // ファイルサイズ確認
+                // laravelの入力チェック機構を調べ切れていないためここでは普通にif文でチェックする
+                // 1000 * 1000 = 1000000byte(1Mbyte)より大きければエラー
+                $limit = 1000 * 1000;
+                Log::debug('--------------------------------------------');
+                if ($request->file('file')->getSize() > $limit) {
+                    Log::debug('upload file size: ' . $request->file('file')->getSize() . ' bytes is over limit.');
+                    return;
+                }
                 // 画像ファイルがアップロードされてきた場合はファイル名を生成
                 $uuidStr = Str::remove('-', Str::uuid()->toString());
             }

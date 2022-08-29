@@ -27,7 +27,7 @@
                 <label for="email">{{__('email')}}</label><br>
                 <input type="text" name="email"><br>
                 <label for="password">{{__('password')}}</label><br>
-                <input type="text" name="password"><br>
+                <input type="password" name="password"><br>
                 <button type='submit'>{{__('login')}}</button>
                 @csrf
             </form>
