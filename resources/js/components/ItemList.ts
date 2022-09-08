@@ -20,6 +20,14 @@ export default {
             if (ret === undefined) {
                 state.items.push(i);
             }
+        },
+        remove(state: any, i: Item) {
+            const index = state.items.findIndex((element: Item) => {
+                return BigInt(element.itemId) === BigInt(i.itemId);
+            });
+            if (index != -1) {
+                state.items.splice(index);
+            }
         }
     }
 }

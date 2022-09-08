@@ -90,4 +90,36 @@ class ItemController extends Controller
     {
         return Storage::download($key);
     }
+
+    /**
+     * 投稿データを削除する
+     * 戻り値は本来は結果のJSONであるべきであるがここではvoidとする
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function removeItem(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            // 削除対象レコードを取得
+            $target = \DB::table('items')
+                ->whereRaw('id = ? AND user_id = ?', [$request->input('id'), Auth::user()->id])
+                ->get();
+            Log::debug($target);
+            if (count($target) === 1) {
+                // レコードを削除する
+                \DB::table('items')->whereRaw('id = ? AND user_id = ?', [$request->input('id'), Auth::user()->id])->delete();
+                // 投稿画像ファイルを削除する
+                if (!is_null($target[0]->image_id)) {
+                    $key = $target[0]->image_id . '.png';
+                    Storage::delete($key);
+                }
+            }
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollback();
+            throw new \Exception("unexpected error has occurred.", 0, $e);
+        }
+    }
 }

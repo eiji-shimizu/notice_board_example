@@ -28,9 +28,6 @@ export default defineComponent({
     });
 
     const addItem = () => {
-      const input: any = {};
-      input.text = state.text;
-      input.file = state.file;
       const data: FormData = new FormData();
       data.append("text", state.text);
       data.append("file", state.file);

@@ -2,6 +2,7 @@
   <div>
     <div v-for="item in list" :key="item.itemId">
       <item-component
+        v-bind:itemId="item.itemId"
         v-bind:text="item.text"
         v-bind:imageFilePath="item.imageFilePath"
         v-bind:userName="item.userName"

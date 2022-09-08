@@ -33,6 +33,9 @@ Route::prefix('noticeboard')->middleware(['auth'])->group(function () {
     // 投稿
     Route::post('addItem', 'App\Http\Controllers\ItemController@addItem');
 
+    // 投稿削除
+    Route::post('removeItem', 'App\Http\Controllers\ItemController@removeItem');
+
     // 投稿データ取得
     Route::get('getItems', 'App\Http\Controllers\ItemController@getItems');
 
