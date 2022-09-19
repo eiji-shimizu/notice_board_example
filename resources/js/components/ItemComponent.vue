@@ -10,18 +10,22 @@
       <img v-bind:src="imageFilePath" />
     </div>
     <div>
-      <button type="button" @click="removeItem">削除</button>
+      <button type="button" @click="removeItem">{{ state.remove }}</button>
     </div>
     <br />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import { useStore } from "vuex";
 
 import { Item } from "./ItemList";
 import { get, post } from "./rest";
+
+interface State {
+  remove: string;
+}
 
 export default defineComponent({
   props: {
@@ -32,8 +36,15 @@ export default defineComponent({
     createdAt: String,
   },
   setup(props) {
+    const state = reactive<State>({
+      remove: "",
+    });
+    get("words/remove").then((res) => {
+      state.remove = (res as any).contents;
+    });
+
     const store = useStore();
-    
+
     const additionalInfo = () => {
       return " " + props.userName + " " + props.createdAt;
     };
@@ -56,7 +67,7 @@ export default defineComponent({
         store.commit("remove", i);
       }
     };
-    return { additionalInfo, removeItem };
+    return { state, additionalInfo, removeItem };
   },
 });
 </script>
