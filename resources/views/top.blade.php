@@ -25,7 +25,7 @@
         <header-component></header-component>
         <br>
         <item-list-component></item-list-component>
-        <add-item-component></add-item-component>
+        <modal-component component-name='add-item-component' flag-name='isAddItemShow'></modal-component>
     </div>
 </body>
 
