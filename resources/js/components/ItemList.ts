@@ -26,7 +26,7 @@ export default {
                 return BigInt(element.itemId) === BigInt(i.itemId);
             });
             if (index != -1) {
-                state.items.splice(index);
+                state.items.splice(index, 1);
             }
         }
     }
