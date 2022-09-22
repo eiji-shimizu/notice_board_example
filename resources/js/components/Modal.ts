@@ -6,21 +6,19 @@ export default {
     },
     mutations: {
         on(state: any, flagName: string) {
-            if(Object.keys(state).indexOf(flagName) !== -1) {
+            if (Object.keys(state).indexOf(flagName) !== -1) {
                 state[flagName] = true;
             }
         },
         off(state: any, flagName: string) {
-            if(Object.keys(state).indexOf(flagName) !== -1) {
-                console.log('here');
+            if (Object.keys(state).indexOf(flagName) !== -1) {
                 state[flagName] = false;
             }
         }
     },
     getters: {
-        isAddItemOn(state: any) {
-            console.log(state.isAddItemShow);
-            return state.isAddItemShow;
+        isOn: (state: any) => (flagName: string) => {
+            return state[flagName];
         }
     }
 }

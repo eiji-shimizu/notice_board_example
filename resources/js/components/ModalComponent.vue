@@ -18,8 +18,7 @@ export default defineComponent({
     store.commit("off", props.flagName);
 
     const isShow = computed(() => {
-      console.log("there");
-      return store.getters.isAddItemOn;
+      return store.getters.isOn(props.flagName);
     });
 
     return { isShow };

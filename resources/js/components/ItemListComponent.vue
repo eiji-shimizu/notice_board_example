@@ -64,7 +64,6 @@ export default defineComponent({
     });
 
     const create = () => {
-      console.log("modal show.");
       store.commit("on", "isAddItemShow");
     };
 
