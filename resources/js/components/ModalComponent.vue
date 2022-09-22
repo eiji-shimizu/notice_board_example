@@ -1,5 +1,5 @@
 <template>
-  <div v-show="isShow">
+  <div v-show="isShow" class="modal">
     <component v-bind:is="componentName"></component>
   </div>
 </template>

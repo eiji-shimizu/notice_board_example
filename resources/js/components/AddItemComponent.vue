@@ -8,6 +8,7 @@
       @change="fileSelected"
     /><br />
     <button type="button" @click="addItem">{{ state.add }}</button>
+    <button type="button" @click="close">{{ state.close }}</button>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import { get, post } from "./rest";
 
 interface State {
   add: string;
+  close: string;
   text: string;
   file: File;
 }
@@ -29,11 +31,15 @@ export default defineComponent({
 
     const state = reactive<State>({
       add: "",
+      close: "",
       text: "",
       file: new File([], ""),
     });
     get("words/add").then((res) => {
       state.add = (res as any).contents;
+    });
+    get("words/close").then((res) => {
+      state.close = (res as any).contents;
     });
 
     const addItem = () => {
@@ -54,6 +60,10 @@ export default defineComponent({
       store.commit("off", "isAddItemShow");
     };
 
+    const close = () => {
+      store.commit("off", "isAddItemShow");
+    };
+
     const fileSelected = (e: Event) => {
       if (e != null && e.target != null) {
         if (e.target instanceof HTMLInputElement) {
@@ -64,7 +74,7 @@ export default defineComponent({
       }
     };
 
-    return { state, addItem, fileSelected };
+    return { state, addItem, close, fileSelected };
   },
 });
 </script>
