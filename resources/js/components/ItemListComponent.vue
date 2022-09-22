@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="button" @click="add">{{ state.add }}</button>
+    <button type="button" @click="create">{{ state.create }}</button>
     <br />
     <br />
     <div v-for="item in list" :key="item.itemId">
@@ -29,7 +29,7 @@ import { Item } from "./ItemList";
 import { get, createUrl } from "./rest";
 
 interface State {
-  add: string;
+  create: string;
   // ポーリング用
   intervalId: any;
 }
@@ -39,11 +39,11 @@ export default defineComponent({
     const store = useStore();
 
     const state = reactive<State>({
-      add: "",
+      create: "",
       intervalId: null,
     });
-    get("words/add").then((res) => {
-      state.add = (res as any).contents;
+    get("words/create").then((res) => {
+      state.create = (res as any).contents;
     });
 
     get("getItems").then((data) => {
@@ -63,7 +63,7 @@ export default defineComponent({
       });
     });
 
-    const add = () => {
+    const create = () => {
       console.log("modal show.");
       store.commit("on", "isAddItemShow");
     };
@@ -99,7 +99,7 @@ export default defineComponent({
       return store.state.itemList.items;
     });
 
-    return { state, list, add };
+    return { state, list, create };
   },
 });
 </script>
